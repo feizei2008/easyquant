@@ -14,3 +14,4 @@ class DefaultQuotationEngine(BaseEngine):
 
     def fetch_quotation(self):
         return self.source.all
+        # return self.source.stocks(stock_list)

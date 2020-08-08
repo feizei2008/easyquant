@@ -1,5 +1,6 @@
 {
-    "userName":"用户名",
-    "servicePwd":"通讯密码",
-    "trdpwd":"加密后的密码"
+    "user":"",
+    "comm_password":"",
+    "password":"",
+    "exe_path":"C:\\htzqzyb2\\xiadan.exe"
 }

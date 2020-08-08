@@ -7,6 +7,10 @@ import threading
 import time
 from collections import OrderedDict
 from threading import Thread, Lock
+import json
+import argparse
+from collections import namedtuple
+# 此处修改参见：https://github.com/shidenggui/easyquant/pull/59/files/6a908b565397d5add14d8591c147f5afaa83682e
 
 import easytrader
 from logbook import Logger, StreamHandler
@@ -38,10 +42,14 @@ class MainEngine:
 
         # 登录账户
         if (broker is not None) and (need_data is not None):
+            broker += "_client"
             self.user = easytrader.use(broker)
             need_data_file = pathlib.Path(need_data)
             if need_data_file.exists():
-                self.user.prepare(need_data)
+                # self.user.prepare(need_data)
+                with open(need_data_file) as json_data:
+                    need_data = json.load(json_data)
+                    self.user.login(**need_data)
             else:
                 log_handler.warn("券商账号信息文件 %s 不存在, easytrader 将不可用" % need_data)
         else:
